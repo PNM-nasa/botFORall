@@ -11,7 +11,7 @@ const CLIENT_ID = "1248467019502977135";
 process.loadEnvFile(".env")
 
 const TOKEN:string =process.env.TOKEN?? "undefined the deo nao duoc"
-console.log(process.env.TOKEN)
+
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
 (async ()=> {
