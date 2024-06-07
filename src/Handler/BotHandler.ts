@@ -7,6 +7,11 @@ import {
 import { Client, GatewayIntentBits } from "discord.js";
 import CommandHandler from "./CommandHandler";
 
+interface Handles {
+  name: string;
+  handle: (interaction: ChatInputCommandInteraction<CacheType>) => void;
+}
+
 interface Options {
   name: string;
   description: string;
@@ -27,12 +32,19 @@ export default class BotHandler {
 
   public commands: Commands[] = [];
 
+  public handles: Handles[] = [];
+
   public addCommand(
     name: string,
     description: string,
-    options: Options[]
+    options: Options[],
+    interactionx: (interaction: ChatInputCommandInteraction<CacheType>) => void
   ): void {
     this.commands.push({ name, description, options });
+    this.handles.push({
+      name: name,
+      handle: interactionx,
+    });
   }
 
   public removeCommand(name: string) {
@@ -75,15 +87,14 @@ export default class BotHandler {
 
     client.on("interactionCreate", async (interaction) => {
       if (!interaction.isChatInputCommand()) return;
+
+      this.handles.map(({ name, handle }) => {
+        CommandHandler.handle(name, interaction, handle);
+      });
     });
 
     client.login(this.token);
   }
-
-  public handleCommand(
-    name: string,
-    interactionx: (interaction: ChatInputCommandInteraction<CacheType>) => void
-  ) {}
 }
 
 export { BotHandler };

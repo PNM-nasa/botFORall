@@ -8,19 +8,20 @@ if (!TOKEN) {
 
 const bot = new BotHandler("1123583992222974042", TOKEN);
 
-bot.addCommand("name", "reply with pong", [
-  {
-    name: "testasd",
-    description: "test",
-    type: 3,
-    required: false,
-  },
-]);
+bot.addCommand(
+  "ping",
+  "reply with pong",
+  [
+    {
+      name: "test",
+      description: "test",
+      type: 3,
+      required: false,
+    },
+  ],
+  async (interaction) => {
+    await interaction.reply("Pong!");
+  }
+);
 
 bot.start();
-
-bot.handleCommand("ping", async (interaction) => {
-  await interaction.reply("pong");
-});
-
-bot.login();
