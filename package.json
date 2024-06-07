@@ -1,0 +1,15 @@
+{
+  "name": "bot_discordjs",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npx tsx index.ts ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PNMnasa",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "discord.js": "^14.15.3"
+  }
+}
